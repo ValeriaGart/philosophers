@@ -6,7 +6,7 @@
 #    By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 12:59:18 by vharkush          #+#    #+#              #
-#    Updated: 2023/06/10 11:05:12 by vharkush         ###   ########.fr        #
+#    Updated: 2023/06/23 11:34:03 by vharkush         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = ./philo
 
 SRCS =	src/philosophers.c	\
 		src/input.c			\
-		src/utils.c
+		src/utils.c			\
+		src/create.c
 
 CC = cc
 

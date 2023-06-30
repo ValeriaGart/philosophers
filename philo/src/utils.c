@@ -6,11 +6,19 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 11:04:38 by vharkush          #+#    #+#             */
-/*   Updated: 2023/06/10 12:01:54 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:39:02 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
+
+long long	ft_time_of_day(void)
+{
+	struct timeval time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
 
 int	ft_isdigit(int a)
 {
