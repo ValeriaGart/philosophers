@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:33:04 by vharkush          #+#    #+#             */
-/*   Updated: 2023/06/30 13:01:15 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/07/01 11:55:10 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,29 +92,34 @@ int	ft_create(t_input *input)
 		return (write(2, "Error\nMalloc failed\n", 20));
 	input->philo->input = input;
 	input->start = ft_time_of_day();
-	while (++i < input->philos)
+	if (pthread_mutex_init(&input->print, NULL))
+		input->err = 2;
+	while ((++i < input->philos) && !input->err)
 	{
 		input->philo->philo_ind = i;
 		if (pthread_mutex_init(&input->philo[i].my_turn_m, NULL))
 		{
-			//destroy mutexes
-			input->philos = i;
-			input->err++;
+			input->err = 1;
 			break ;
 		}
 		if(pthread_create(&input->philo[i].phi, NULL, &routine, &(input->philo[i])))
 		{
-			//destroy mutexes
-			input->philos = i;
-			input->err++;
+			input->err= 1;
 			break ;
 		}
 	}
+	if (input->err)
+		input->philos = i;
 	i = -1;
 	while (++i < input->philos)
+	{
 		pthread_join(input->philo[i].phi, NULL);
+		pthread_mutex_destroy(&input->philo[i].my_turn_m);
+	}
+	if (input->err != 2)
+		pthread_mutex_destroy(&input->print);
 	free (input->philo);
 	if (input->err)
-		return (write(2, "Error\nPthrerad creating failed\n", 31));
+		return (write(2, "Error\nPthrerad or mutex creating failed\n", 40));
 	return (0);
 }
