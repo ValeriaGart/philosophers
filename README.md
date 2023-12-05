@@ -30,3 +30,14 @@
 
 <img src = "https://res.cloudinary.com/practicaldev/image/fetch/s--eqcyI4o8--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xuhgni9ifz9d1uo1red2.png">
 
+## Run my programm!
+
+### 1) Make
+
+Just write to the terminal "make" 🤷🏻
+
+### 2) Run
+
+  ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+
+  Where time_to_die/eat/sleep is set in milleseconds

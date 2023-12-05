@@ -6,12 +6,18 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 10:43:53 by vharkush          #+#    #+#             */
-/*   Updated: 2023/06/26 18:41:20 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/12/05 23:45:25 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
 
+/*
+	Here I first of all check if times_to_eat or time_to_die is set to 0.
+	Sending to checking input function and catching the error if it occures
+	Sending to the main process, catching error if occures
+	Exit accordingly
+*/
 int	main(int ac, char **av)
 {
 	t_input	input;
