@@ -1,6 +1,6 @@
 # philosophers
 
-  This project teaches the basics of threading a process. Fun time operating the threads and discovering mutexes🔒
+  This project teaches the basics of threading a process. Fun times operating the threads and discovering mutexes 🔒
 
 ## The problem 
 
@@ -25,3 +25,8 @@
 
 ```
   The goal is to let philosophers live as long as they possibly could. 
+
+## Illustration
+
+<img src = "https://res.cloudinary.com/practicaldev/image/fetch/s--eqcyI4o8--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xuhgni9ifz9d1uo1red2.png">
+
