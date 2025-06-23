@@ -16,7 +16,7 @@ int	ft_dead(int daytime, t_philo *philo)
 {
 	if (daytime - philo->last_ate >= philo->input->die)
 	{
-		printf("%ld %d died\n", ft_time_of_day, philo->philo_ind);
+		printf("%lld %d died\n", ft_time_of_day(), philo->philo_ind);
 		return (1);
 	}
 	return (0);
@@ -24,15 +24,15 @@ int	ft_dead(int daytime, t_philo *philo)
 
 int	ft_eat(t_philo *philo)
 {
-	int	start_eating;
+	long long	start_eating;
 
 	start_eating = ft_time_of_day();
-	printf("%ld %d is eating\n", start_eating, philo->philo_ind);
+	printf("%lld %d is eating\n", start_eating, philo->philo_ind);
 	while (1)
 	{
-		if (ft_dead)
+		if (ft_dead(ft_time_of_day(), philo))
 			return (1);
-		if (ft_time_of_day - start_eating >= philo->input->eat)
+		if (ft_time_of_day() - start_eating >= philo->input->eat)
 			break;
 	}
 	return (0);
@@ -40,15 +40,15 @@ int	ft_eat(t_philo *philo)
 
 int ft_sleep(t_philo *philo)
 {
-	long	start_sleeping;
+	long long	start_sleeping;
 
 	start_sleeping = ft_time_of_day();
-	printf("%ld %d is sleeping\n", start_sleeping, philo->philo_ind);
+	printf("%lld %d is sleeping\n", start_sleeping, philo->philo_ind);
 	while (1)
 	{
-		if (ft_dead)
+		if (ft_dead(ft_time_of_day(), philo))
 			return (1);
-		if (ft_time_of_day - start_sleeping >= philo->input->sleep)
+		if (ft_time_of_day() - start_sleeping >= philo->input->sleep)
 			break;
 	}
 	return (0);
@@ -67,15 +67,15 @@ void	*routine(void *param)
 	while (1)
 	{
 		if (ft_dead(ft_time_of_day(), philo))
-			return (1);
+			return (NULL);
 		if (philo->my_turn)
 		{
 			if (ft_eat(philo))
-				return (1);
+				return (NULL);
 			philo->last_ate = ft_time_of_day();
 			if (ft_sleep(philo))
-				return (1);
-			printf("%ld %d is thinking\n", ft_time_of_day, philo->philo_ind);
+				return (NULL);
+			printf("%lld %d is thinking\n", ft_time_of_day(), philo->philo_ind);
 		}
 	}
 	return (NULL);
@@ -87,16 +87,17 @@ int	ft_create(t_input *input)
 
 	i = -1;
 	input->err = 0;
+	printf("DEBUG: input->philos = %d\n", input->philos);
 	input->philo = malloc(input->philos * sizeof(t_philo));
 	if (!input->philo)
 		return (write(2, "Error\nMalloc failed\n", 20));
-	input->philo->input = input;
 	input->start = ft_time_of_day();
 	if (pthread_mutex_init(&input->print, NULL))
 		input->err = 2;
 	while ((++i < input->philos) && !input->err)
 	{
-		input->philo->philo_ind = i;
+		input->philo[i].input = input;
+		input->philo[i].philo_ind = i;
 		if (pthread_mutex_init(&input->philo[i].my_turn_m, NULL))
 		{
 			input->err = 1;

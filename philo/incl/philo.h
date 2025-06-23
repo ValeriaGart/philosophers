@@ -27,12 +27,12 @@ typedef struct s_philo
 	int				philo_ind;
 	pthread_t		phi;
 	struct s_input	*input;
-	pthread_mutex_t	*my_turn_m;
+	pthread_mutex_t	my_turn_m;
 }		t_philo;
 
 typedef struct s_input
 {
-	pthread_mutex_t	*print;
+	pthread_mutex_t	print;
 	long long	start;
 	int			philos;
 	int			die;

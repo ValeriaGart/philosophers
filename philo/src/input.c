@@ -14,25 +14,22 @@
 
 void	ft_store_input_num(int cur, t_input *input, long num)
 {
-	if (cur == 1)
-		input->philos = (int)num;
-	if (cur == 2)
-		input->die = (int)num;
-	if (cur == 3)
-		input->eat = (int)num;
-	if (cur == 4)
-		input->sleep = (int)num;
-	if (cur == 5)
-		input->opt_n_eat = (int)num;
+	switch (cur) {
+		case 0: input->philos = (int)num; break;
+		case 1: input->die = (int)num; break;
+		case 2: input->eat = (int)num; break;
+		case 3: input->sleep = (int)num; break;
+		case 4: input->opt_n_eat = (int)num; break;
+	}
 }
 
 int	ft_store_input(t_input *input, int ac, char **av, int cur)
 {
 	long	num;
 
-	if (cur == ac)
+	if (cur == ac - 1)
 		return (0);
-	num = atol(av[cur]);
+	num = ft_atol(av[cur + 1]);
 	if (num > 2147483647)
 		return (write(2, "Error\nOne of input nums overflows\n", 34));
 	ft_store_input_num(cur, input, num);
@@ -67,7 +64,7 @@ int	ft_input(t_input *input, int ac, char **av)
 		input->opt_n_eat = -1;
 	if (ft_rdigits(ac, av))
 		return (1);
-	if (ft_store_input(input, ac, av, 1))
+	if (ft_store_input(input, ac, av, 0))
 		return (1);
 	return (0);
 }
